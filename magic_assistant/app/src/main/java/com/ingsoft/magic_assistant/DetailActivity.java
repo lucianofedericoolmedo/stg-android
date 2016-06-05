@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.ingsoft.magic_assistant.data.Discipline;
+import com.ingsoft.magic_assistant.data.Card;
 
 
 public class DetailActivity extends AppCompatActivity {
@@ -21,14 +21,14 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
-        Discipline disciplina = (Discipline) getIntent().getParcelableExtra("disciplina");
+        Card disciplina = (Card) getIntent().getParcelableExtra("disciplina");
 
         setContentView(R.layout.activity_detail);
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
             String url = extras.getString(EXTRA_URL);
 
-            DisciplineDetailFragment detailFragment = (DisciplineDetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
+            CardDetailFragment detailFragment = (CardDetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
             detailFragment.setDiscipline(disciplina);
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);

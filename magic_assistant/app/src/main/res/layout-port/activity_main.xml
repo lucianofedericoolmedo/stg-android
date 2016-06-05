@@ -20,7 +20,7 @@
 
         <fragment
             android:id="@+id/listFragment"
-            class="com.ingsoft.magic_assistant.DisciplinesListFragment"
+            class="com.ingsoft.magic_assistant.CardsListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />

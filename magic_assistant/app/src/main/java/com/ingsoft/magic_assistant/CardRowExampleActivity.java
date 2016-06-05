@@ -3,7 +3,7 @@ package com.ingsoft.magic_assistant;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class DisciplineRowExampleActivity extends AppCompatActivity {
+public class CardRowExampleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

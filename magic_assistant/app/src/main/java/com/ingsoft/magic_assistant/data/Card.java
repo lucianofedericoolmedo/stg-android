@@ -4,13 +4,8 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Gym Discipline
- * <br/>-<br/>
- * Disciplina, Ejercicio o Deporte.
- * Created by cduarte on 1/14/16.
- */
-public class Discipline  implements Parcelable{
+
+public class Card implements Parcelable{
 
     private String name;
     private String schedule;
@@ -19,12 +14,12 @@ public class Discipline  implements Parcelable{
     private int logoResId;
     private String description;
 
-    public Discipline(Context ctx, int nameResId, int scheduleResId, int level, int price, int logoResId, int descriptionResId) {
+    public Card(Context ctx, int nameResId, int scheduleResId, int level, int price, int logoResId, int descriptionResId) {
         this(ctx.getString(nameResId), ctx.getString(scheduleResId),
                 level, price, logoResId, ctx.getString(descriptionResId));
     }
 
-    public Discipline(String name, String schedule, int level, int price, int logoResId, String description) {
+    public Card(String name, String schedule, int level, int price, int logoResId, String description) {
         this.name = name;
         this.schedule = schedule;
         this.level = level;
@@ -33,7 +28,7 @@ public class Discipline  implements Parcelable{
         this.description = description;
     }
 
-    protected Discipline(Parcel in) {
+    protected Card(Parcel in) {
         name = in.readString();
         schedule = in.readString();
         level = in.readInt();
@@ -42,15 +37,15 @@ public class Discipline  implements Parcelable{
         description = in.readString();
     }
 
-    public static final Creator<Discipline> CREATOR = new Creator<Discipline>() {
+    public static final Creator<Card> CREATOR = new Creator<Card>() {
         @Override
-        public Discipline createFromParcel(Parcel in) {
-            return new Discipline(in);
+        public Card createFromParcel(Parcel in) {
+            return new Card(in);
         }
 
         @Override
-        public Discipline[] newArray(int size) {
-            return new Discipline[size];
+        public Card[] newArray(int size) {
+            return new Card[size];
         }
     };
 

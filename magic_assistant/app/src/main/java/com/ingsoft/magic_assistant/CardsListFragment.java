@@ -1,7 +1,6 @@
 package com.ingsoft.magic_assistant;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,16 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.ingsoft.magic_assistant.adapters.ListDisciplinasAdapter;
-import com.ingsoft.magic_assistant.data.Discipline;
-import com.ingsoft.magic_assistant.data.DisciplineStore;
+import com.ingsoft.magic_assistant.adapters.ListCardsAdapter;
+import com.ingsoft.magic_assistant.data.Card;
+import com.ingsoft.magic_assistant.data.CardStore;
 
 import java.util.List;
 
-/**
- * Created by cduarte on 1/14/16.
- */
-public class DisciplinesListFragment extends Fragment {
+
+public class CardsListFragment extends Fragment {
 
     private OnDisciplineSelectedListener listener;
 
@@ -29,20 +26,20 @@ public class DisciplinesListFragment extends Fragment {
                 container, false);
 
         ListView lista = (ListView) view.findViewById(R.id.disciplinasLista);
-        ListDisciplinasAdapter listaAdaptada = new ListDisciplinasAdapter(this, DisciplineStore.getAll(this.getContext()));
+        ListCardsAdapter listaAdaptada = new ListCardsAdapter(this, CardStore.getAll(this.getContext()));
         lista.setAdapter(listaAdaptada);
         return view;
     }
 
-    public void armarLista(List<Discipline> disciplinas) {
+    public void armarLista(List<Card> disciplinas) {
 
         ListView lista = (ListView) getView().findViewById(R.id.disciplinasLista);
-        ListDisciplinasAdapter listaAdaptada = new ListDisciplinasAdapter(this, disciplinas);
+        ListCardsAdapter listaAdaptada = new ListCardsAdapter(this, disciplinas);
         lista.setAdapter(listaAdaptada);
     }
 
     public interface OnDisciplineSelectedListener {
-        void onDisciplineSelected(Discipline discipline);
+        void onDisciplineSelected(Card card);
     }
 
     @Override
@@ -52,12 +49,12 @@ public class DisciplinesListFragment extends Fragment {
             listener = (OnDisciplineSelectedListener) context;
         } else {
             throw new ClassCastException(context.toString()
-                    + " must implement DisciplinesListFragment.OnDisciplineSelectedListener");
+                    + " must implement CardsListFragment.OnDisciplineSelectedListener");
         }
     }
 
-    public void tellTheListenerThatADisciplineWasSelected(Discipline discipline) {
-        listener.onDisciplineSelected(discipline);
+    public void tellTheListenerThatADisciplineWasSelected(Card card) {
+        listener.onDisciplineSelected(card);
     }
 
 }

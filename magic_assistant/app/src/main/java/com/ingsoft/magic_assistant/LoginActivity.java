@@ -362,7 +362,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
             if (success) {
                 finish();
-                Intent myIntent = new Intent(LoginActivity.this,MainActivity.class);
+                Intent myIntent = new Intent(LoginActivity.this,SearchMainActivity.class);
                 LoginActivity.this.startActivity(myIntent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

@@ -2,7 +2,6 @@ package com.ingsoft.magic_assistant;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -10,14 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.ingsoft.magic_assistant.data.Discipline;
-import com.ingsoft.magic_assistant.data.DisciplineStore;
+import com.ingsoft.magic_assistant.data.Card;
+import com.ingsoft.magic_assistant.data.CardStore;
 
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity
-        implements DisciplinesListFragment.OnDisciplineSelectedListener {
+public class SearchMainActivity extends AppCompatActivity
+        implements CardsListFragment.OnDisciplineSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +30,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onDisciplineSelected(Discipline discipline) {
-        // TODO - if a discipline is selected, we should do something with it (show it maybe?)
+    public void onDisciplineSelected(Card card) {
+        // TODO - if a card is selected, we should do something with it (show it maybe?)
         /* TODO - Si una disciplina se selecciona, debemos hacer algo con ella, como mostrarla en
                   otro fragment o abrir un nuevo activity.. */
         boolean dual_pane = getResources().getBoolean(R.bool.dual_pane);
         if(dual_pane){
-            DisciplineDetailFragment fragment = (DisciplineDetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
-            fragment.setDiscipline(discipline);
+            CardDetailFragment fragment = (CardDetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
+            fragment.setDiscipline(card);
 
         } else {
             Intent intent = new Intent (this,DetailActivity.class);
-            intent.putExtra("disciplina",discipline);
+            intent.putExtra("disciplina", card);
             startActivity(intent);}
     }
 
@@ -61,26 +60,24 @@ public class MainActivity extends AppCompatActivity
         // TODO - 2. Configurar el Share Provider para que comparta los datos de la disciplina seleccionada
         // TODO - 3. El botón de compartir debería estar deshabilitado mientras no hay una disciplina selecionada
 
-
-
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchview = (SearchView) MenuItemCompat.getActionView(searchItem);
-        final List<Discipline> disciplinas = DisciplineStore.getAll(this);
+        final List<Card> disciplinas = CardStore.getAll(this);
         searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(query.length()==0){((DisciplinesListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment)).armarLista(disciplinas);}
+                if(query.length()==0){((CardsListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment)).armarLista(disciplinas);}
                 else{
-                    List<Discipline> filtradas = DisciplineStore.filtrar(disciplinas, query);
-                    ((DisciplinesListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment)).armarLista(filtradas);}
+                    List<Card> filtradas = CardStore.filtrar(disciplinas, query);
+                    ((CardsListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment)).armarLista(filtradas);}
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                List<Discipline> filtradas = DisciplineStore.filtrar(disciplinas, newText);
-                ((DisciplinesListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment)).armarLista(filtradas);
+                List<Card> filtradas = CardStore.filtrar(disciplinas, newText);
+                ((CardsListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment)).armarLista(filtradas);
                 return false;
             }
         });
